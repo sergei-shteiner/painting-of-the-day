@@ -23,6 +23,17 @@
     </style>
 </head>
 <body>
-    <div class="date">{{ date }}</div>
+    <div class="date" id="client-date"></div>
+    <script>
+        function formatDate(date) {
+            const options = { year: 'numeric', month: 'short', day: 'numeric' };
+            return date.toLocaleDateString(undefined, options);
+        }
+
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const today = new Date();
+            document.getElementById('client-date').textContent = formatDate(today);
+        });
+    </script>
 </body>
 </html>
