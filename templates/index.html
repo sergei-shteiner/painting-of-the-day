@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Today</title>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
     <style>
         body {
             background-color: black;
@@ -17,7 +16,7 @@
             font-family: 'Open Sans', sans-serif;
         }
         .date {
-            font-size: 15vw; /* Font size will be 15% of the window width */
+            font-size: 12vw; /* Font size will be 12% of the window width */
             text-align: center;
         }
     </style>
@@ -25,14 +24,16 @@
 <body>
     <div class="date" id="client-date"></div>
     <script>
-        function formatDate(date) {
+        function formatDate(date, locale) {
             const options = { year: 'numeric', month: 'short', day: 'numeric' };
-            return date.toLocaleDateString(undefined, options);
+            return date.toLocaleDateString(locale, options);
         }
 
         document.addEventListener('DOMContentLoaded', (event) => {
             const today = new Date();
-            document.getElementById('client-date').textContent = formatDate(today);
+            const country = "{{ country }}"; // Get the client's country from the server
+            const locale = (country && country !== 'None') ? country : undefined; // Use the country as the locale if it is defined and not equal to 'None', otherwise use browser settings
+            document.getElementById('client-date').textContent = formatDate(today, locale);
         });
     </script>
 </body>
